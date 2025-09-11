@@ -12,11 +12,7 @@ app.post('/registrar', (req, res) => {
     return res.status(400).json({ erro: 'Tipo inválido' });
   }
 
-  const pessoa = {
-    nome,
-    tipo,
-    especialidade: tipo === 'medico' ? especialidade : null
-  };
+  
 
   pessoas.push(pessoa);
   res.status(201).json({ mensagem: 'Pessoa registrada com sucesso!', pessoa });
@@ -29,3 +25,10 @@ app.get('/pessoas', (req, res) => {
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
 });
+
+const pessoa = {
+  nome: form.nome.value,
+  tipo: form.tipo.value,
+  especialidade: form.tipo.value === 'medico' ? form.especialidade.value : null,
+  senha: form.senha.value 
+};

@@ -1,9 +1,12 @@
 import json
 import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
 DB_FILE = 'pessoas.json'
+CORS(app)
 
 def carregar_pessoas():
     if os.path.exists(DB_FILE):
@@ -22,14 +25,20 @@ def registrar_pessoa():
     nome = dados.get('nome')
     tipo = dados.get('tipo')
     especialidade = dados.get('especialidade') if tipo == 'medico' else None
-
+    senha = dados.get('senha')
+    
     if tipo not in ['medico', 'cliente']:
         return jsonify({'erro': 'Tipo inválido'}), 400
 
+    
+    if not senha:
+        return jsonify({'erro': 'Senha obrigatória'}), 400
+    senha_hash = generate_password_hash(senha)
     pessoa = {
         'nome': nome,
         'tipo': tipo,
-        'especialidade': especialidade
+        'especialidade': especialidade,
+        'senha_hash': senha_hash
     }
     pessoas.append(pessoa)
     salvar_pessoas(pessoas)

@@ -12,7 +12,10 @@
       <option value="cliente">Cliente</option>
     </select>
     <input type="text" name="especialidade" placeholder="Especialidade (apenas medico)">
+    <input type="password" name="senha" placeholder="Senha" required>
+    <br>
     <button type="submit">Registrar</button>
+    
   </form>
   <h2>Pessoas Registradas</h2>
   <ul id="listaPessoas"></ul>
@@ -24,7 +27,8 @@
       const pessoa = {
         nome: form.nome.value,
         tipo: form.tipo.value,
-        especialidade: form.tipo.value === 'medico' ? form.especialidade.value : null
+        especialidade: form.tipo.value === 'medico' ? form.especialidade.value : null,
+        senha: form.senha.value,
       };
       await fetch('http://localhost:5000/registrar', {
         method: 'POST',
