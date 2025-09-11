@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "nome": "Enzo",
+    "tipo": "medico",
+    "especialidade": "dermatologista",
+    "senha_hash": "scrypt:32768:8:1$ySTu9YwU1vKbqkHS$7d8892fb53281335181c63c01d3ca70ecd08149a990db182464c6ed5854ac4152fdb828c5caa87111520a11cf9c7bd87e98130e252fa7d00ad1a11f62948cc84"
+  }
+]

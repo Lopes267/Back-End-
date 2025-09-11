@@ -21,6 +21,7 @@
   <ul id="listaPessoas"></ul>
 
   <script>
+    // Registrar pessoa
     document.getElementById('formPessoa').onsubmit = async function(e) {
       e.preventDefault();
       const form = e.target;
@@ -28,27 +29,25 @@
         nome: form.nome.value,
         tipo: form.tipo.value,
         especialidade: form.tipo.value === 'medico' ? form.especialidade.value : null,
-        senha: form.senha.value,
+        senha: form.senha.value
       };
       await fetch('http://localhost:5000/registrar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pessoa)
       });
-      carregarPessoas();
+      listarPessoas();
     };
 
-    async function carregarPessoas() {
+    
+    async function listarPessoas() {
       const res = await fetch('http://localhost:5000/pessoas');
       const pessoas = await res.json();
       const lista = document.getElementById('listaPessoas');
-      lista.innerHTML = '';
-      pessoas.forEach(p => {
-        lista.innerHTML += `<li>${p.nome} (${p.tipo}${p.tipo === 'medico' ? ' - ' + p.especialidade : ''})</li>`;
-      });
+      lista.innerHTML = pessoas.map(p => `<li>${p.nome} (${p.tipo}${p.tipo === 'medico' ? ' - ' + p.especialidade : ''})</li>`).join('');
     }
 
-    carregarPessoas();
+    listarPessoas();
   </script>
 </body>
 </html>
