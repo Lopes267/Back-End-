@@ -8,7 +8,7 @@ app = Flask(__name__)
 DB_FILE = 'pessoas.json'
 CORS(app)
 
-# Endpoint de login
+
 @app.route('/login', methods=['POST'])
 def login():
     dados = request.json
