@@ -4,5 +4,11 @@
     "tipo": "medico",
     "especialidade": "dermatologista",
     "senha_hash": "scrypt:32768:8:1$ySTu9YwU1vKbqkHS$7d8892fb53281335181c63c01d3ca70ecd08149a990db182464c6ed5854ac4152fdb828c5caa87111520a11cf9c7bd87e98130e252fa7d00ad1a11f62948cc84"
+  },
+  {
+    "nome": "Felipe",
+    "tipo": "cliente",
+    "especialidade": null,
+    "senha_hash": "scrypt:32768:8:1$2VGVPaYULR1xa7QJ$2cfcd59847b6ad8055a6a435697d53280ca9f309a65215138eabe9a417c2ec50f6ea72f03c1c8741a8d690004e70db2ef43b7219686653e7414719ece778588f"
   }
 ]

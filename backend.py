@@ -2,11 +2,23 @@ import json
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 DB_FILE = 'pessoas.json'
 CORS(app)
+
+# Endpoint de login
+@app.route('/login', methods=['POST'])
+def login():
+    dados = request.json
+    nome = dados.get('nome')
+    senha = dados.get('senha')
+    pessoas = carregar_pessoas()
+    pessoa = next((p for p in pessoas if p['nome'] == nome), None)
+    if not pessoa or not check_password_hash(pessoa['senha_hash'], senha):
+        return jsonify({'success': False, 'message': 'Usuário ou senha incorretos'}), 401
+    return jsonify({'success': True, 'tipo': pessoa['tipo'], 'especialidade': pessoa.get('especialidade', '')})
 
 def carregar_pessoas():
     if os.path.exists(DB_FILE):
