@@ -1,4 +1,4 @@
-// teste.js
+
 
 document.getElementById('formPessoa').onsubmit = async function(e) {
   e.preventDefault();
@@ -9,12 +9,16 @@ document.getElementById('formPessoa').onsubmit = async function(e) {
     especialidade: form.tipo.value === 'medico' ? form.especialidade.value : null,
     senha: form.senha.value
   };
-  await fetch('http://localhost:5000/registrar', {
+  const res = await fetch('http://localhost:5000/registrar', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(pessoa)
   });
-  listarPessoas();
+  if (res.ok) {
+    window.location.href = 'login.html';
+  } else {
+    listarPessoas();
+  }
 };
 
 async function listarPessoas() {
