@@ -1,11 +1,11 @@
-// login.js
+
 
 document.getElementById('formLogin').onsubmit = async function(e) {
   e.preventDefault();
   const form = e.target;
   const nome = form.nome.value;
   const senha = form.senha.value;
-  // Envia para o backend para validação
+ 
   const res = await fetch('http://localhost:5000/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -16,6 +16,12 @@ document.getElementById('formLogin').onsubmit = async function(e) {
     document.getElementById('mensagem').innerText = resultado.message || 'Usuário ou senha incorretos.';
     return;
   }
-  // Redireciona para site.html se login for bem-sucedido
-  window.location.href = 'site.html';
+  // Redirect based on role
+  // append nome to redirect so site can show personalized message
+  const nomeParam = encodeURIComponent(nome);
+  if (resultado.tipo === 'medico') {
+    window.location.href = `site_medico.html?nome=${nomeParam}`;
+  } else {
+    window.location.href = `site.html?nome=${nomeParam}`;
+  }
 };
